@@ -4,7 +4,6 @@
 #include <math.h>
 #include <ctime>
 #include "opencv2/core.hpp"
-#include "opencv2/features2d.hpp"
 #include "opencv2/opencv.hpp"
 #include "opencv2/imgproc.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
@@ -26,7 +25,6 @@
 
 using namespace cv;
 using namespace std;
-using namespace cv::xfeatures2d;
 using namespace std::chrono;
 
 typedef struct 
@@ -49,8 +47,8 @@ int main(int, char**)
     VideoCapture cap(0); // open the default camera
     if(!cap.isOpened())  // check if we succeeded
         return -1;
-    cap.set(CV_CAP_PROP_FRAME_WIDTH, REQUESTED_IMAGE_WIDTH);
-    cap.set(CV_CAP_PROP_FRAME_HEIGHT, REQUESTED_IMAGE_HEIGHT);
+    //cap.set(CV_CAP_PROP_FRAME_WIDTH, REQUESTED_IMAGE_WIDTH);
+    //cap.set(CV_CAP_PROP_FRAME_HEIGHT, REQUESTED_IMAGE_HEIGHT);
 
     vector<uchar> status;
     vector<float> err;
@@ -76,8 +74,8 @@ int main(int, char**)
     Point maxLoc;
     Scalar meanGrad;
 
-    namedWindow("WIP",1);
-    namedWindow("diff",2);
+    //namedWindow("WIP",1);
+    //namedWindow("diff",2);
     for(;;)
     {
         Mat frame_left;
@@ -292,7 +290,7 @@ int main(int, char**)
         //-- Show detected (drawn) keypoints
         //imshow("WIP", debugImage );
 	//imshow("Diff", absDiff);
-        if(waitKey(1) >= 0) break;
+        //if(waitKey(1) >= 0) break;
 #endif
         
     }
