@@ -5,20 +5,19 @@
 #include <ctime>
 #include "opencv2/core.hpp"
 #include "opencv2/features2d.hpp"
-#include "opencv2/highgui.hpp"
 #include "opencv2/opencv.hpp"
 #include "opencv2/imgproc.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
  
 //Search Kernel for evaluating local gradient.
-#define BLOCK_SIZE 16 
+#define BLOCK_SIZE 24
 //nxn block size for doing sum of absolute difference search.
 //actual matching method is defined in the matchTemplate call
 //to the opencv library.
-#define SEARCH_SIZE 48
-#define MAX_FEATURES 3000
-#define REQUESTED_IMAGE_HEIGHT 240*2
-#define REQUESTED_IMAGE_WIDTH 320*2
+#define SEARCH_SIZE 64
+#define MAX_FEATURES 15
+#define REQUESTED_IMAGE_HEIGHT 480
+#define REQUESTED_IMAGE_WIDTH 640
 
 //Undefine this value and run CVTest if you want to see
 //how much cpu this is using.  All the debug output uses
@@ -264,11 +263,11 @@ int main(int, char**)
 		
 		if (X/num < 0)
 		{
-			str << "bb_" << std::asctime(std::localtime(&result)) << ".png";
+			str << "bb_" << std::asctime(std::localtime(&result)) << ".jpg";
 		}
 		else
 		{
-			str << std::asctime(std::localtime(&result)) << ".png";
+			str << std::asctime(std::localtime(&result)) << ".jpg";
 		}
 
 		imwrite(str.str(), debugImage);
@@ -291,8 +290,8 @@ int main(int, char**)
 
 #ifdef DEBUG
         //-- Show detected (drawn) keypoints
-        imshow("WIP", debugImage );
-	imshow("Diff", absDiff);
+        //imshow("WIP", debugImage );
+	//imshow("Diff", absDiff);
         if(waitKey(1) >= 0) break;
 #endif
         
