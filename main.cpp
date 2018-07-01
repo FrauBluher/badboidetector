@@ -273,6 +273,8 @@ int main(int, char**)
 		cooldown = 35;
 	}
 
+	//Write current frame to ramdisk.
+	imwrite("/mnt/tmpfs/current.jpg", debugImage.jpg);
 
         #ifdef DEBUG
         clock_t end = clock();
@@ -284,7 +286,6 @@ int main(int, char**)
 
 	absdiff(frame_tock, frame_left, absDiff);
         frame_tock = frame_left;
-
 
 #ifdef DEBUG
         //-- Show detected (drawn) keypoints
