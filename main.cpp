@@ -274,7 +274,7 @@ int main(int, char**)
 	}
 
 	//Write current frame to ramdisk.
-	imwrite("/mnt/tmpfs/current.jpg", debugImage.jpg);
+	imwrite("/mnt/tmpfs/current.jpg", debugImage);
 
         #ifdef DEBUG
         clock_t end = clock();
