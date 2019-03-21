@@ -172,11 +172,12 @@ int main(int, char**)
 	float X = 0;
 	float Y = 0;
 	int num = 0;
+	int tests = 0;
         
         //TODO: Make the sort faster and do it on the fly in the previous loop.
         //std::sort(&rois[0], &rois[roiCount], compareByGrad);
 
-        for (k = 0; k < MAX_FEATURES && (k < roiCount); k++)
+        for (k = 0; (k < roiCount); k++)
         {
             //Use the strongest features, but also set a lower limit.
             //if (rois[k].mG < 1)
@@ -196,7 +197,13 @@ int main(int, char**)
 
             if ((meanDiff[0] > 20) && sXi >= 0 && sYi >=0 && (sXi + SEARCH_SIZE) < actualWidth && (sYi + SEARCH_SIZE) < actualHeight)
             {
-                test = true;  
+                test = true;
+		tests++;  
+            }
+
+	    if (tests > MAX_FEATURES)
+            {
+		break;
             }
 
 		std::ostringstream str;
@@ -278,7 +285,7 @@ int main(int, char**)
         clock_t end = clock();
         double elapsed_msecs = double(end - begin) / CLOCKS_PER_SEC * 1000;
 
-        cout << "loop time: " << elapsed_msecs << " mS" << endl;
+        //cout << "loop time: " << elapsed_msecs << " mS" << endl;
         x_av = y_av = count = 0;
         #endif
 
@@ -287,12 +294,13 @@ int main(int, char**)
 
 
 	//Write current frame to ramdisk.
-	imwrite("/mnt/ramdisk/current.bmp", debugImage);
+	//imwrite("/mnt/ramdisk/current.bmp", debugImage);
+	//imwrite("./current.bmp", debugImage);
 #ifdef DEBUG
         //-- Show detected (drawn) keypoints
-        //imshow("WIP", debugImage );
+        imshow("WIP", debugImage );
 	//imshow("Diff", absDiff);
-        //if(waitKey(1) >= 0) break;
+        if(waitKey(1) >= 0) break;
 #endif
         
     }
